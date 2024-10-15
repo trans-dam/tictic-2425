@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tictic/screens/home.dart';
-import 'package:tictic/style/colors.dart';
-import 'package:tictic/style/fonts.dart';
-import 'package:tictic/style/others.dart';
-import 'package:tictic/widgets/btn.dart';
-import 'package:tictic/widgets/text_slider.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../style/others.dart';
 import '../style/spacings.dart';
 
-class Welcome extends StatelessWidget {
-  const Welcome({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +29,6 @@ class Welcome extends StatelessWidget {
                   semanticsLabel: 'Logo TicTic'),
               const SizedBox(
                 height: kVerticalPaddingL,
-              ),
-              const TextSlider(),
-              Btn(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const Home(),
-                    ),
-                  );
-                },
-                text: "Continuer sans compte",
               ),
             ],
           ),

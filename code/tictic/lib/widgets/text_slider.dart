@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tictic/style/spacings.dart';
 import 'package:tictic/widgets/bullet.dart';
@@ -5,15 +7,14 @@ import 'package:tictic/widgets/bullet.dart';
 import '../style/others.dart';
 
 class TextSlider extends StatefulWidget {
-  TextSlider({super.key});
+  const TextSlider({super.key});
 
   @override
   State<TextSlider> createState() => _TextSliderState();
 }
 
 class _TextSliderState extends State<TextSlider> {
-  final _pageViewController =
-      PageController(initialPage: 0, viewportFraction: 1);
+  final _pageViewController = PageController(viewportFraction: 1);
 
   int idx = 0;
 
@@ -53,26 +54,21 @@ class _TextSliderState extends State<TextSlider> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: _items.map(
               (item) {
-                int currentIdx = _items.indexOf(item);
                 return GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
-                    debugPrint(currentIdx.toString());
-                    _pageViewController.animateToPage(currentIdx,
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeInOut);
-                    setState(() {
-                      idx = currentIdx;
-                    });
+                    _pageViewController.animateToPage(_items.indexOf(item),
+                        curve: Curves.easeInOut,
+                        duration: const Duration(milliseconds: 250));
                   },
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
                     child: Bullet(
+                      isActivated: _items.indexOf(item) == idx ? true : false,
                       width: (MediaQuery.of(context).size.width -
                               kHorizontalPaddingXXL) /
                           _items.length,
-                      isActivated: currentIdx == idx,
                     ),
                   ),
                 );
