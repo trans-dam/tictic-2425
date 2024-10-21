@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tictic/screens/home.dart';
-import 'package:tictic/style/colors.dart';
-import 'package:tictic/style/fonts.dart';
+import 'package:tictic/screens/register.dart';
 import 'package:tictic/style/others.dart';
 import 'package:tictic/widgets/btn.dart';
 import 'package:tictic/widgets/text_slider.dart';
@@ -40,7 +39,7 @@ class Welcome extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const Home(),
+                      builder: (context) =>  Register(),
                     ),
                   );
                 },

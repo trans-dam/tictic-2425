@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tictic/screens/welcome.dart';
+import 'package:tictic/style/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TicTic',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: kMainColor),
         useMaterial3: true,
       ),
       home: const Welcome(),
