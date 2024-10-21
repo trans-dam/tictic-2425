@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tictic/screens/home.dart';
 import 'package:tictic/style/colors.dart';
 import 'package:tictic/widgets/btn.dart';
 import 'package:tictic/widgets/text_input.dart';
@@ -33,7 +35,8 @@ class Register extends StatelessWidget {
         child: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
               child: Form(
                 key: _registerFormKey,
                 child: Column(
@@ -69,7 +72,8 @@ class Register extends StatelessWidget {
                         validator: (value) {
                           return validateName(value, 'Prénom');
                         },
-                        tooltipMessage: 'Votre prénom sera visible par vos amis'),
+                        tooltipMessage:
+                            'Votre prénom sera visible par vos amis'),
                     TextInput(
                         prefixIcon: Icons.person,
                         hintText: 'Duchant',
@@ -82,7 +86,8 @@ class Register extends StatelessWidget {
                         validator: (value) {
                           return validateName(value, 'Nom');
                         },
-                        tooltipMessage: 'Votre nom permet d’éviter les homonymes'),
+                        tooltipMessage:
+                            'Votre nom permet d’éviter les homonymes'),
                     TextInput(
                       prefixIcon: Icons.mail,
                       hintText: 'exemple@mail.com',
@@ -106,7 +111,23 @@ class Register extends StatelessWidget {
                             onTap: () async {
                               if (_registerFormKey.currentState != null &&
                                   _registerFormKey.currentState!.validate()) {
-                    
+                                try {
+                                  await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email: _email, password: _password);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Home()));
+                                } on FirebaseAuthException catch (e) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    showCloseIcon: true,
+                                    duration: const Duration(seconds: 10),
+                                    content: Text(e.message!),
+                                  ));
+                                }
                               }
                             },
                             text: 'Créer mon compte'),
