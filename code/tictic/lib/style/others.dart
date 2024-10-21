@@ -10,3 +10,5 @@ final kShadow = BoxShadow(
 const kLogoRatio = 0.16;
 
 const kBorderRadius = 20.0;
+
+const kSliderRatio = 0.06;

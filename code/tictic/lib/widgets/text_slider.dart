@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:tictic/style/fonts.dart';
 import 'package:tictic/style/spacings.dart';
 import 'package:tictic/widgets/bullet.dart';
 
@@ -30,7 +31,7 @@ class _TextSliderState extends State<TextSlider> {
     return Column(
       children: [
         SizedBox(
-          height: 40,
+          height: MediaQuery.of(context).size.height * kSliderRatio,
           child: PageView.builder(
             controller: _pageViewController,
             itemCount: _items.length,
@@ -43,7 +44,10 @@ class _TextSliderState extends State<TextSlider> {
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-                child: Text(_items[index]),
+                child: Text(
+                  _items[index],
+                  style: kLabelStyle,
+                ),
               );
             },
           ),
